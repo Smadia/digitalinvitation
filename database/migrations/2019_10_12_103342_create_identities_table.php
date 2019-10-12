@@ -31,7 +31,7 @@ class CreateIdentitiesTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('name');
-            $table->enum('Gender', ['Pria', 'Wanita']);
+            $table->string('gender');
             $table->text('address')
                 ->nullable();
             $table->timestamps();
