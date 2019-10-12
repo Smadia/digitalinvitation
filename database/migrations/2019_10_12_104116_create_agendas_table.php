@@ -23,8 +23,10 @@ class CreateAgendasTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('name');
-            $table->timestamp('started_at');
-            $table->timestamp('ended_at');
+            $table->timestamp('started_at')
+                ->nullable();
+            $table->timestamp('ended_at')
+                ->nullable();
             $table->text('address')
                 ->nullable();
             $table->text('helper')
