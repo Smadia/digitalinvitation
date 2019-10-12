@@ -15,6 +15,21 @@ class CreateGuestsTable extends Migration
     {
         Schema::create('guests', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('event_id')
+                ->unsigned();
+            $table->foreign('event_id')
+                ->references('id')
+                ->on('events')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->bigInteger('identity_id')
+                ->unsigned()
+                ->nullable();
+            $table->foreign('identity_id')
+                ->references('id')
+                ->on('identities')
+                ->onUpdate('cascade')
+                ->onDelete('set null');
             $table->string('name');
             $table->string('slug');
             $table->string('phone')

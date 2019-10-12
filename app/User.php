@@ -15,9 +15,13 @@ class User extends \TCG\Voyager\Models\User
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $fillable = ['role_id',
+        'name',
+        'email',
+        'avatar',
+        'email_verified_at',
+        'settings',
+        'password'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -36,4 +40,36 @@ class User extends \TCG\Voyager\Models\User
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * role
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    /**
+     * events
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'user_id');
+    }
+
+    /**
+     * roles
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_roles');
+    }
+
+
 }
